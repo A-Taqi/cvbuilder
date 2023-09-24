@@ -7,7 +7,7 @@ import CVBuilder from './components/CVBuilder';
 import CVPreview from './components/CVPreview';
 
 const drawerWidth = 240;
-const navItems = ['Build', 'Preview'];
+const navItems = ['Build', 'Preview', 'Load Sample'];
 
 function App(props) {
   const { window } = props;
@@ -30,6 +30,15 @@ function App(props) {
 
   const [currentPage, setCurrentPage] = useState('Build');
 
+  const handleDrawerNavigation = (item) => {
+    if (item === 'Load Sample') {
+      loadSampleData();
+    }
+    else {
+      setCurrentPage(item);
+    }
+  }
+
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography variant="h6" sx={{ my: 2 }}>
@@ -39,7 +48,7 @@ function App(props) {
       <List>
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }} onClick={() => setCurrentPage(item)}>
+            <ListItemButton sx={{ textAlign: 'center' }} onClick={() => handleDrawerNavigation(item)}>
               <ListItemText primary={item}/>
             </ListItemButton>
           </ListItem>
@@ -49,6 +58,27 @@ function App(props) {
   );
 
   const container = window !== undefined ? () => window().document.body : undefined;
+
+  const loadSampleData = () => {
+    buildCV({
+      generalInfo: {fullName: 'John Doe', email: 'johndoe@email.com', phone: '+1 (123) 456-7890'},
+      education: [
+        {title: 'ABC University', school: 'ABC University', degree: 'Bachelor of Science in Computer Science', dateFrom: '2010-08-01', dateTo: '2014-05-01'},
+        {title: 'XYZ College', school: 'XYZ College', degree: 'High School Diploma', dateFrom: '2005-09-01', dateTo: '2010-06-01'},
+      ],
+      career: [
+        {title: 'Tech Corp Inc.', company: 'Tech Corp Inc.', position: 'Software Engineer', 'role': 'Developed web applications using React and Node.js.',
+          dateFrom: '2014-06-01'
+        },
+        {title: 'ABC Solutions', company: 'ABC Solutions', position: 'UI/UX Designer', 'role': 'Designed user-friendly interfaces for mobile apps.',
+          dateFrom: '2012-01-01', dateTo: '2014-05-01'
+        },
+        {title: 'GlobalTech Ltd.', company: 'GlobalTech Ltd.', position: 'Project Manager', 'role': 'Led cross-functional teams and managed project timelines.',
+        dateFrom: '2010-05-01', dateTo: '2011-12-01'
+        },
+      ]
+    });
+  }
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
@@ -73,7 +103,7 @@ function App(props) {
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: '#fff' }} onClick={() => setCurrentPage(item)}>
+              <Button key={item} sx={{ color: '#fff' }} onClick={() => handleDrawerNavigation(item)}>
                 {item}
               </Button>
             ))}
@@ -100,7 +130,7 @@ function App(props) {
       <Box component="main" sx={{ p: 3, backgroundColor: 'ghostwhite' }}>
         <Toolbar />
           <Box sx={{display: currentPage !== 'Build' ? 'none':''}}>
-            <CVBuilder onUpdate={buildCV}/>
+            <CVBuilder data={cvData} onUpdate={buildCV}/>
           </Box>
           <Box sx={{display: currentPage !== 'Preview' ? 'none':''}}>
             <CVPreview data={cvData}/>

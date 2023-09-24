@@ -1,12 +1,14 @@
 import { Email, Phone } from "@mui/icons-material";
-import { Box, Divider, Typography } from "@mui/material";
+import { Box, Divider, Typography, useMediaQuery } from "@mui/material";
 import { useTheme } from '@mui/material/styles';
 
 function CVHeader( {data}) {
     const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
     const contactInfoStyle = {
         textAlign: 'center', 
-        p: 2, 
+        p: isMobile ? 0:2, 
         color: theme.palette.primary.contrastText, 
         flex: 1, 
         display: 'flex', 
@@ -20,7 +22,7 @@ function CVHeader( {data}) {
                         {data ? data.fullName : ''}
                     </Typography>
                     <Divider sx={{backgroundColor: theme.palette.primary.contrastText}} />
-                    <Box display='flex' textAlign='center'>
+                    <Box display='flex' textAlign='center' flexDirection={isMobile ? 'column':'row'}>
                         <Typography variant="h6" sx={contactInfoStyle}>
                             <Email/>
                             {data ? data.email : ''}

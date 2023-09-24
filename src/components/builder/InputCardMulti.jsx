@@ -1,10 +1,10 @@
 import InputCard from "./InputCard";
 import { Button, Box} from "@mui/material";
 import { Add, Cancel, Delete, Save } from "@mui/icons-material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-function InputCardMulti({title, onSubmit, children, newEntry}) {
-    const [entries, setEntries] = useState([]);
+function InputCardMulti({title, onSubmit, children, newEntry, data}) {
+    const [entries, setEntries] = useState(data ?? []);
     const [showForm, setShowForm] = useState(false);
 
     const handleOnSubmit = () => {
@@ -26,6 +26,12 @@ function InputCardMulti({title, onSubmit, children, newEntry}) {
     const cancelForm = () => {
         setShowForm(false);
     }
+
+    useEffect(() => {
+        if (data) {
+            setEntries(data);
+        }
+    }, [data]);
 
     return (
         <InputCard cardTitle={title} onSubmit={handleOnSubmit}>

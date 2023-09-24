@@ -7,8 +7,8 @@ function CareerInput({data, onSubmit}) {
     const [newCompany, setNewCompany] = useState('');
     const [newPosition, setNewPosition] = useState('');
     const [newRole, setNewRole] = useState('');
-    const [newFromDate, setNewFromDate] = useState('');
-    const [newToDate, setNewToDate] = useState('');
+    const [newdateFrom, setNewdateFrom] = useState('');
+    const [newdateTo, setNewdateTo] = useState('');
 
     const addCareer = () => {
         const newEntry = {
@@ -16,14 +16,14 @@ function CareerInput({data, onSubmit}) {
             company: newCompany,
             position: newPosition,
             role: newRole,
-            dateFrom: newFromDate,
-            dateTo: newToDate,
+            dateFrom: newdateFrom,
+            dateTo: newdateTo,
         };
         setNewCompany('');
         setNewPosition('');
         setNewRole('');
-        setNewFromDate('');
-        setNewToDate('');
+        setNewdateFrom('');
+        setNewdateTo('');
         return newEntry;
 
     }
@@ -33,7 +33,7 @@ function CareerInput({data, onSubmit}) {
     }
 
     return (
-        <InputCardMulti title="Career" onSubmit={handleSubmit} entries={data} newEntry={addCareer}>
+        <InputCardMulti title="Career" onSubmit={handleSubmit} entries={data} newEntry={addCareer} data={data}>
             <Box sx={{display: 'flex', flexDirection: 'row', gap: 10}}>
                     <FormControl variant="standard" sx={{flex: 1}}>
                         <InputLabel htmlFor="from-input">
@@ -46,8 +46,8 @@ function CareerInput({data, onSubmit}) {
                                     <DateRange />
                                 </InputAdornment>
                             }
-                            value={newFromDate}
-                            onChange={(e) => setNewFromDate(e.target.value)}
+                            value={newdateFrom}
+                            onChange={(e) => setNewdateFrom(e.target.value)}
                             type="date"
                         />
                     </FormControl>
@@ -62,8 +62,8 @@ function CareerInput({data, onSubmit}) {
                                     <DateRange />
                                 </InputAdornment>
                             }
-                            value={newToDate}
-                            onChange={(e) => setNewToDate(e.target.value)}
+                            value={newdateTo}
+                            onChange={(e) => setNewdateTo(e.target.value)}
                             type="date"
                         />
                     </FormControl>

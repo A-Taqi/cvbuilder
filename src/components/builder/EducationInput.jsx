@@ -6,21 +6,21 @@ import { useState } from "react";
 function EducationInput({data, onSubmit}) {
     const [newSchool, setNewSchool] = useState('');
     const [newDegree, setNewDegree] = useState('');
-    const [newFromDate, setNewFromDate] = useState('');
-    const [newToDate, setNewToDate] = useState('');
+    const [newdateFrom, setNewdateFrom] = useState('');
+    const [newdateTo, setNewdateTo] = useState('');
 
     const addEducation = () => {
         const newEntry = {
             title: newSchool,
             school: newSchool,
             degree: newDegree,
-            dateFrom: newFromDate,
-            dateTo: newToDate,
+            dateFrom: newdateFrom,
+            dateTo: newdateTo,
           };
         setNewSchool('');
         setNewDegree('');
-        setNewFromDate('');
-        setNewToDate('');
+        setNewdateFrom('');
+        setNewdateTo('');
         return newEntry;
 
     }
@@ -30,7 +30,7 @@ function EducationInput({data, onSubmit}) {
     }
 
     return (
-        <InputCardMulti title="Education" onSubmit={handleSubmit} entries={data} newEntry={addEducation}>
+        <InputCardMulti title="Education" onSubmit={handleSubmit} newEntry={addEducation} data={data}>
             <FormControl variant="standard">
                     <InputLabel htmlFor="school-input">
                         School
@@ -73,8 +73,8 @@ function EducationInput({data, onSubmit}) {
                                     <DateRange />
                                 </InputAdornment>
                             }
-                            value={newFromDate}
-                            onChange={(e) => setNewFromDate(e.target.value)}
+                            value={newdateFrom}
+                            onChange={(e) => setNewdateFrom(e.target.value)}
                             type="date"
                         />
                     </FormControl>
@@ -89,8 +89,8 @@ function EducationInput({data, onSubmit}) {
                                     <DateRange />
                                 </InputAdornment>
                             }
-                            value={newToDate}
-                            onChange={(e) => setNewToDate(e.target.value)}
+                            value={newdateTo}
+                            onChange={(e) => setNewdateTo(e.target.value)}
                             type="date"
                         />
                     </FormControl>

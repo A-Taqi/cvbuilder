@@ -1,7 +1,7 @@
 import { Box, FormControl, FormHelperText, Input, InputAdornment, InputLabel } from "@mui/material";
 import InputCard from "./InputCard";
 import { AccountCircle, Email, Phone } from "@mui/icons-material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function GeneralInfoInput({data, onSubmit}) {
     const [fullName, setFullName] = useState('');
@@ -11,6 +11,14 @@ function GeneralInfoInput({data, onSubmit}) {
     const handleSubmit = () => {
         onSubmit({fullName, email, phone})
       };
+
+    useEffect(() => {
+        if (data) {
+            setFullName(data.fullName);
+            setEmail(data.email);
+            setPhone(data.phone);
+        }
+    }, [data]);
 
     return (
         <InputCard cardTitle={'General Information'} onSubmit={handleSubmit}>
