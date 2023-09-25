@@ -14,9 +14,9 @@ function GeneralInfoInput({data, onSubmit}) {
 
     useEffect(() => {
         if (data) {
-            setFullName(data.fullName);
-            setEmail(data.email);
-            setPhone(data.phone);
+            setFullName(data && data.fullName ? data.fullName : '');
+            setEmail(data && data.email ? data.email : '');
+            setPhone(data && data.phone ? data.phone : '');
         }
     }, [data]);
 

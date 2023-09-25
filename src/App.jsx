@@ -1,13 +1,15 @@
-// App.js
-import React, { useState } from 'react';
-//import './styles/App.css';
+import React, { useState, useEffect } from 'react';
 import { AppBar, Box, Button, CssBaseline, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, Toolbar, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CVBuilder from './components/CVBuilder';
 import CVPreview from './components/CVPreview';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
 
 const drawerWidth = 240;
-const navItems = ['Build', 'Preview', 'Load Sample'];
+const navItems = ['Build', 'Preview', 'Load Sample', 'Clear Data'];
 
 function App(props) {
   const { window } = props;
@@ -31,11 +33,19 @@ function App(props) {
   const [currentPage, setCurrentPage] = useState('Build');
 
   const handleDrawerNavigation = (item) => {
-    if (item === 'Load Sample') {
-      loadSampleData();
-    }
-    else {
-      setCurrentPage(item);
+    switch(item) {
+      case 'Load Sample':
+        loadSampleData();
+        break;
+      case 'Clear Data':
+        setCvData({
+          generalInfo: [],
+          education: [],
+          career: [],
+        });
+        break;
+      default:
+        setCurrentPage(item);
     }
   }
 
@@ -79,6 +89,13 @@ function App(props) {
       ]
     });
   }
+
+  useEffect(() => {
+        loadSampleData();
+    return () => {
+      
+    };
+  }, []); // The empty dependency array [] ensures this runs only once
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column' }}>

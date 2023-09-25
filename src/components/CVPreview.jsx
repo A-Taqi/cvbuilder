@@ -35,7 +35,7 @@ function CVPreview({data}) {
 
     return (
         <Container>
-            <Paper sx={{maxWidth: 960, margin: 'auto'}}>
+            <Paper sx={{minHeight: 480, maxWidth: 960, margin: 'auto'}}>
                 <CVHeader data={data.generalInfo}/>
                 <CVSection title="Education" data={formattedEducation}/>
                 <CVSection title="Career" data={formattedCareer}/>

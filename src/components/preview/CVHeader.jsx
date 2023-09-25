@@ -19,17 +19,29 @@ function CVHeader( {data}) {
     return (
         <Box sx={{backgroundColor: theme.palette.primary.dark}}>
                     <Typography variant="h2" sx={{textAlign:'center', p:2, color:theme.palette.primary.contrastText}}>
-                        {data ? data.fullName : ''}
+                        {data && data.fullName? data.fullName : ''}
                     </Typography>
                     <Divider sx={{backgroundColor: theme.palette.primary.contrastText}} />
                     <Box display='flex' textAlign='center' flexDirection={isMobile ? 'column':'row'}>
                         <Typography variant="h6" sx={contactInfoStyle}>
-                            <Email/>
-                            {data ? data.email : ''}
+                            {data && data.email ? 
+                                <>
+                                    <Email/>
+                                    {data.email}
+                                </>
+                                :
+                                ''
+                            }
                         </Typography>
                         <Typography variant="h6" sx={contactInfoStyle}>
-                            <Phone/>
-                            {data ? data.phone : ''}
+                        {data && data.phone? 
+                                <>
+                                    <Phone/>
+                                    {data.phone}
+                                </>
+                                :
+                                ''
+                            }
                         </Typography>
                     </Box>
             </Box>
