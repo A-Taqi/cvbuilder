@@ -16,7 +16,7 @@ function CVSection({data, title}) {
             <Box>
                     {data ? data.map((entry, index) => {
                         return (
-                            <Box key={index} sx={{display: 'flex', flexDirection: 'row', marginY: 2}}>
+                            <Box key={index} sx={{display: 'flex', flexDirection: 'row', marginY: 2, gap:1}}>
                                 <Box flex={1}>
                                     <Typography>
                                         {new Date(entry.dateFrom).toLocaleDateString('en-US', { month: '2-digit', year: 'numeric' })} – {entry.dateTo ? new Date(entry.dateTo).toLocaleDateString('en-US', { month: '2-digit', year: 'numeric' }) : 'present'}
