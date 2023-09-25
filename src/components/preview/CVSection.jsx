@@ -6,7 +6,6 @@ function CVSection({data, title}) {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-
     return (
         <Box sx={{display: 'flex', flexDirection: 'column', marginX: isMobile? 2: 5, marginY: isMobile? 3:5}}>
             <Box sx={{backgroundColor: theme.palette.secondary.light}}>
